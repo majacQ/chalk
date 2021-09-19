@@ -1,10 +1,7 @@
-/* globals suite, set, bench */
-'use strict';
-const chalk = require('.');
+/* globals suite, bench */
+import chalk from './index.js';
 
 suite('chalk', () => {
-	set('iterations', 1000000);
-
 	const chalkRed = chalk.red;
 	const chalkBgRed = chalk.bgRed;
 	const chalkBlueBgRed = chalk.blue.bgRed;
@@ -47,8 +44,6 @@ suite('chalk', () => {
 	bench('cached: 1 style nested non-intersecting', () => {
 		chalkBgRed(blueStyledString);
 	});
-
-	set('iterations', 10000);
 
 	bench('cached: 1 style template literal', () => {
 		// eslint-disable-next-line no-unused-expressions

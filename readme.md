@@ -9,7 +9,10 @@
 
 > Terminal string styling done right
 
-[![Build Status](https://travis-ci.org/chalk/chalk.svg?branch=master)](https://travis-ci.org/chalk/chalk) [![Coverage Status](https://coveralls.io/repos/github/chalk/chalk/badge.svg?branch=master)](https://coveralls.io/github/chalk/chalk?branch=master) [![npm dependents](https://badgen.net/npm/dependents/chalk)](https://www.npmjs.com/package/chalk?activeTab=dependents) [![Downloads](https://badgen.net/npm/dt/chalk)](https://www.npmjs.com/package/chalk) [![](https://img.shields.io/badge/unicorn-approved-ff69b4.svg)](https://www.youtube.com/watch?v=9auOCbH5Ns4) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo) ![TypeScript-ready](https://img.shields.io/npm/types/chalk.svg) [![run on repl.it](https://repl.it/badge/github/chalk/chalk)](https://repl.it/github/chalk/chalk)
+[![Coverage Status](https://coveralls.io/repos/github/chalk/chalk/badge.svg?branch=main)](https://coveralls.io/github/chalk/chalk?branch=main)
+[![npm dependents](https://badgen.net/npm/dependents/chalk)](https://www.npmjs.com/package/chalk?activeTab=dependents) [![Downloads](https://badgen.net/npm/dt/chalk)](https://www.npmjs.com/package/chalk)
+[![run on repl.it](https://repl.it/badge/github/chalk/chalk)](https://repl.it/github/chalk/chalk)
+[![Support Chalk on DEV](https://badge.devprotocol.xyz/0x44d871aebF0126Bf646753E2C976Aa7e68A66c15/descriptive)](https://stakes.social/0x44d871aebF0126Bf646753E2C976Aa7e68A66c15)
 
 <img src="https://cdn.jsdelivr.net/gh/chalk/ansi-styles@8261697c95bf34b6c7767e2cbe9941a851d59385/screenshot.svg" width="900">
 
@@ -54,6 +57,19 @@
 				<img src="https://sindresorhus.com/assets/thanks/uibakery-logo.jpg" width="270" alt="UI Bakery">
 			</div>
 		</a>
+  <<<<<<< meta-tweaks
+  =======
+		<br>
+		<a href="https://strapi.io/?ref=sindresorhus">
+			<div>
+				<img src="https://sindresorhus.com/assets/thanks/strapi-logo-white-bg.png" width="220" alt="Strapi">
+			</div>
+			<b>Strapi is the leading open-source headless CMS.</b>
+			<div>
+				<sup>It’s 100% JavaScript, fully customizable, and developer-first.</sup>
+			</div>
+		</a>
+  >>>>>>> main
 	</p>
 </div>
 
@@ -82,7 +98,7 @@ $ npm install chalk
 ## Usage
 
 ```js
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 console.log(chalk.blue('Hello world!'));
 ```
@@ -90,7 +106,8 @@ console.log(chalk.blue('Hello world!'));
 Chalk comes with an easy to use composable API where you just chain and nest the styles you want.
 
 ```js
-const chalk = require('chalk');
+import chalk from 'chalk';
+
 const log = console.log;
 
 // Combine styled and normal strings
@@ -127,7 +144,6 @@ DISK: {rgb(255,131,0) ${disk.used / disk.total * 100}%}
 `);
 
 // Use RGB colors in terminal emulators that support it.
-log(chalk.keyword('orange')('Yay for orange colored text!'));
 log(chalk.rgb(123, 45, 67).underline('Underlined reddish color'));
 log(chalk.hex('#DEADED').bold('Bold gray!'));
 ```
@@ -135,10 +151,10 @@ log(chalk.hex('#DEADED').bold('Bold gray!'));
 Easily define your own themes:
 
 ```js
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 const error = chalk.bold.red;
-const warning = chalk.keyword('orange');
+const warning = chalk.hex('#FFA500'); // Orange color
 
 console.log(error('Error!'));
 console.log(warning('Warning!'));
@@ -147,6 +163,8 @@ console.log(warning('Warning!'));
 Take advantage of console.log [string substitution](https://nodejs.org/docs/latest/api/console.html#console_console_log_data_args):
 
 ```js
+import chalk from 'chalk';
+
 const name = 'Sindre';
 console.log(chalk.green('Hello %s'), name);
 //=> 'Hello Sindre'
@@ -171,7 +189,9 @@ Color support is automatically detected, but you can override it by setting the 
 If you need to change this in a reusable module, create a new instance:
 
 ```js
-const ctx = new chalk.Instance({level: 0});
+import {Chalk} from 'chalk';
+
+const customChalk = new Chalk({level: 0});
 ```
 
 | Level | Description |
@@ -181,7 +201,7 @@ const ctx = new chalk.Instance({level: 0});
 | `2` | 256 color support |
 | `3` | Truecolor support (16 million colors) |
 
-### chalk.supportsColor
+### supportsColor
 
 Detect whether the terminal [supports color](https://github.com/chalk/supports-color). Used internally and handled for you, but exposed for convenience.
 
@@ -189,9 +209,9 @@ Can be overridden by the user with the flags `--color` and `--no-color`. For sit
 
 Explicit 256/Truecolor mode can be enabled using the `--color=256` and `--color=16m` flags, respectively.
 
-### chalk.stderr and chalk.stderr.supportsColor
+### chalkStderr and supportsColorStderr
 
-`chalk.stderr` contains a separate instance configured with color support detected for `stderr` stream instead of `stdout`. Override rules from `chalk.supportsColor` apply to this too. `chalk.stderr.supportsColor` is exposed for convenience.
+`chalkStderr` contains a separate instance configured with color support detected for `stderr` stream instead of `stdout`. Override rules from `supportsColor` apply to this too. `supportsColorStderr` is exposed for convenience.
 
 ## Styles
 
@@ -250,7 +270,7 @@ Explicit 256/Truecolor mode can be enabled using the `--color=256` and `--color=
 Chalk can be used as a [tagged template literal](https://exploringjs.com/es6/ch_template-literals.html#_tagged-template-literals).
 
 ```js
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 const miles = 18;
 const calculateFeet = miles => miles * 5280;
@@ -266,12 +286,14 @@ Blocks are delimited by an opening curly brace (`{`), a style, some content, and
 Template styles are chained exactly like normal Chalk styles. The following three statements are equivalent:
 
 ```js
+import chalk from 'chalk';
+
 console.log(chalk.bold.rgb(10, 100, 200)('Hello!'));
 console.log(chalk.bold.rgb(10, 100, 200)`Hello!`);
 console.log(chalk`{bold.rgb(10,100,200) Hello!}`);
 ```
 
-Note that function styles (`rgb()`, `hsl()`, `keyword()`, etc.) may not contain spaces between parameters.
+Note that function styles (`rgb()`, `hex()`, etc.) may not contain spaces between parameters.
 
 All interpolated values (`` chalk`${foo}` ``) are converted to strings via the `.toString()` method. All curly braces (`{` and `}`) in interpolated value strings are escaped.
 
@@ -284,25 +306,22 @@ Colors are downsampled from 16 million RGB values to an ANSI color format that i
 Examples:
 
 - `chalk.hex('#DEADED').underline('Hello, world!')`
-- `chalk.keyword('orange')('Some orange text')`
 - `chalk.rgb(15, 100, 204).inverse('Hello!')`
 
-Background versions of these models are prefixed with `bg` and the first level of the module capitalized (e.g. `keyword` for foreground colors and `bgKeyword` for background colors).
+Background versions of these models are prefixed with `bg` and the first level of the module capitalized (e.g. `hex` for foreground colors and `bgHex` for background colors).
 
 - `chalk.bgHex('#DEADED').underline('Hello, world!')`
-- `chalk.bgKeyword('orange')('Some orange text')`
 - `chalk.bgRgb(15, 100, 204).inverse('Hello!')`
 
 The following color models can be used:
 
 - [`rgb`](https://en.wikipedia.org/wiki/RGB_color_model) - Example: `chalk.rgb(255, 136, 0).bold('Orange!')`
 - [`hex`](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) - Example: `chalk.hex('#FF8800').bold('Orange!')`
-- [`keyword`](https://www.w3.org/wiki/CSS/Properties/color/keywords) (CSS keywords) - Example: `chalk.keyword('orange').bold('Orange!')`
-- [`hsl`](https://en.wikipedia.org/wiki/HSL_and_HSV) - Example: `chalk.hsl(32, 100, 50).bold('Orange!')`
-- [`hsv`](https://en.wikipedia.org/wiki/HSL_and_HSV) - Example: `chalk.hsv(32, 100, 100).bold('Orange!')`
-- [`hwb`](https://en.wikipedia.org/wiki/HWB_color_model) - Example: `chalk.hwb(32, 0, 50).bold('Orange!')`
-- [`ansi`](https://en.wikipedia.org/wiki/ANSI_escape_code#3/4_bit) - Example: `chalk.ansi(31).bgAnsi(93)('red on yellowBright')`
 - [`ansi256`](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit) - Example: `chalk.bgAnsi256(194)('Honeydew, more or less')`
+
+## Browser support
+
+Since Chrome 69, ANSI escape codes are natively supported in the developer console.
 
 ## Windows
 
