@@ -57,6 +57,8 @@
 				<img src="https://sindresorhus.com/assets/thanks/uibakery-logo.jpg" width="270" alt="UI Bakery">
 			</div>
 		</a>
+  <<<<<<< meta-tweaks
+  =======
 		<br>
 		<a href="https://strapi.io/?ref=sindresorhus">
 			<div>
@@ -67,6 +69,7 @@
 				<sup>It’s 100% JavaScript, fully customizable, and developer-first.</sup>
 			</div>
 		</a>
+  >>>>>>> main
 	</p>
 </div>
 
